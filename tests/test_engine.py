@@ -180,8 +180,8 @@ class WeatherTests(unittest.TestCase):
         c=asdict(self.cfg);c['variables'][0]['source']['path']='weather.csv';c['output_dir']='runs'
         dump(c,self.root/'project.json')
         restored,_=load_project_file(self.root/'project.json')
-        self.assertEqual(Path(restored.variables[0].source.path),self.root/'weather.csv')
-        self.assertEqual(Path(restored.output_dir),self.root/'runs')
+        self.assertEqual(Path(restored.variables[0].source.path),(self.root/'weather.csv').resolve())
+        self.assertEqual(Path(restored.output_dir),(self.root/'runs').resolve())
 
     def test_daynight_model_preserves_segment_and_unlabelled_inference(self):
         self.cfg.presets=[ExperimentPreset(name='昼夜',grain='daynight')]
