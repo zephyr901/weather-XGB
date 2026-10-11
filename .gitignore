@@ -1,0 +1,19 @@
+# Local environments and generated research results
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+release/
+verification/
+runs/
+*.zip
+*.log
+.env
+.env.*
+# Machine-specific files
+.idea/
+.vscode/
+Thumbs.db
+.DS_Store

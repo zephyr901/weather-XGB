@@ -1,0 +1,132 @@
+{
+  "name": "Synthetic example · Not observed data",
+  "variables": [
+    {
+      "name": "Air temperature",
+      "unit": "°C",
+      "column": "temperature",
+      "frequency": "h",
+      "aggregation": "mean",
+      "source": {
+        "path": "synthetic_weather.csv",
+        "sheet": "",
+        "header": 1,
+        "station": "station_id",
+        "time": "datetime",
+        "single_station": "",
+        "layout": "long",
+        "id_map": {}
+      },
+      "minimum": null,
+      "maximum": null,
+      "version": 1
+    },
+    {
+      "name": "Wind speed",
+      "unit": "m/s",
+      "column": "wind",
+      "frequency": "h",
+      "aggregation": "mean",
+      "source": {
+        "path": "synthetic_weather.csv",
+        "sheet": "",
+        "header": 1,
+        "station": "station_id",
+        "time": "datetime",
+        "single_station": "",
+        "layout": "long",
+        "id_map": {}
+      },
+      "minimum": 0,
+      "maximum": null,
+      "version": 1
+    }
+  ],
+  "shapes": [
+    {
+      "scale": "250",
+      "source": {
+        "path": "synthetic_shapes.csv",
+        "sheet": "",
+        "header": 1,
+        "station": "station_id",
+        "time": "datetime",
+        "single_station": "",
+        "layout": "long",
+        "id_map": {}
+      },
+      "numeric": [
+        "GCR",
+        "BCR"
+      ],
+      "categorical": [
+        "LCZ"
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Daily morphology",
+      "grain": "daily",
+      "task": "association",
+      "features": "calendar",
+      "coverage": 0.8,
+      "day_start": 6,
+      "day_end": 18,
+      "season_start": 12,
+      "reference_ids": [],
+      "reference_min": 1,
+      "version": 1
+    },
+    {
+      "name": "Daily one-step forecast",
+      "grain": "daily",
+      "task": "forecast",
+      "features": "calendar",
+      "coverage": 0.8,
+      "day_start": 6,
+      "day_end": 18,
+      "season_start": 12,
+      "reference_ids": [],
+      "reference_min": 1,
+      "version": 1
+    },
+    {
+      "name": "Independent background",
+      "grain": "daily",
+      "task": "association",
+      "features": "background",
+      "coverage": 0.8,
+      "day_start": 6,
+      "day_end": 18,
+      "season_start": 12,
+      "reference_ids": [
+        "S08",
+        "S09"
+      ],
+      "reference_min": 1,
+      "version": 1
+    }
+  ],
+  "backgrounds": [],
+  "groups": {
+    "All features": []
+  },
+  "output_dir": "../runs",
+  "outer_folds": 3,
+  "inner_folds": 2,
+  "time_outer": 3,
+  "time_inner": 2,
+  "seed": 42,
+  "n_jobs": 2,
+  "grid": [
+    {
+      "n_estimators": 20,
+      "max_depth": 2,
+      "learning_rate": 0.08,
+      "min_child_weight": 2,
+      "reg_lambda": 5
+    }
+  ],
+  "version": 1
+}
